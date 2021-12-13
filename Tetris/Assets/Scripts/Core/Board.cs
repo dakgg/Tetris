@@ -7,7 +7,7 @@ public class Board : MonoBehaviour
     public Transform EmptySprite;
     public int Height = 30;
     public int Width = 10;
-
+    public int Header = 10;
     Transform[,] m_Grid;
 
     void Awake()
@@ -27,9 +27,26 @@ public class Board : MonoBehaviour
         
     }
 
+    bool IsWithBoard(int x, int y) => (x >= 0 && x < Width && y >= 0);
+    
+    public bool IsValidPosition(Shape shape)
+    {
+        foreach (Transform child in shape.transform)
+        {
+            var pos = Vectorf.Round(child.position);
+            if (!IsWithBoard((int)pos.x, (int)pos.y)) return false;
+        }
+        return true;
+    }
+
+    bool IsOccupied(int x, int y)
+    {
+        return (m_Grid[x,y] != null && m_Grid)
+    }
+
     void DrawEmptyCells()
     {
-        for (int x = 0; x < Width; x++)
+        for (int x = 0; x < Width - Header; x++)
         {
             for (int y = 0; y < Height; y++)
             {
@@ -39,4 +56,14 @@ public class Board : MonoBehaviour
             }
         }
     }
+
+    public void StoreShapeInGrid(Shape shape) 
+    {
+        if (shape == null) return;
+        foreach (Transform child in shape.transform)
+        {
+            var pos = Vectorf.Round(child.position);
+            m_Grid[(int)pos.x, (int)pos.y] = child;
+        }
+    }   
 }

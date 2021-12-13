@@ -11,20 +11,12 @@ public class Shape : MonoBehaviour
         InvokeRepeating("MoveDown", 0, 0.5f);
     }
 
-    void Move(Vector3 moveDir)
-        => transform.position += moveDir;
+    void Move(Vector3 moveDir) => transform.position += moveDir;
 
-    public void MoveLeft()
-       => Move(Vector3.left);
-    
-    public void MoveRight()
-        => Move(Vector3.right);
-
-    public void MoveDown()
-        => Move(Vector3.down);
-
-    public void MoveUp()
-        => Move(Vector3.up);
+    public void MoveLeft() => Move(Vector3.left);
+    public void MoveRight() => Move(Vector3.right);
+    public void MoveDown() => Move(Vector3.down);
+    public void MoveUp() => Move(Vector3.up);
 
     public void RotateRight()
     {
