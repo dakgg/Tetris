@@ -10,17 +10,11 @@ public class Board : MonoBehaviour
     public int Header = 10;
     Transform[,] m_Grid;
 
-    void Awake()
-    {
-        m_Grid = new Transform[Width, Height];
-    }
-
+    void Awake() => m_Grid = new Transform[Width, Height];
+    
     // Start is called before the first frame update
-    void Start()
-    {
-        DrawEmptyCells();
-    }
-
+    void Start() => DrawEmptyCells();
+    
     // Update is called once per frame
     void Update()
     {
@@ -35,15 +29,14 @@ public class Board : MonoBehaviour
         {
             var pos = Vectorf.Round(child.position);
             if (!IsWithBoard((int)pos.x, (int)pos.y)) return false;
+            if (IsOccupied((int)pos.x, (int)pos.y, shape)) return false;
         }
         return true;
     }
 
-    bool IsOccupied(int x, int y)
-    {
-        return (m_Grid[x,y] != null && m_Grid)
-    }
-
+    bool IsOccupied(int x, int y, Shape shape)
+        => (m_Grid[x,y] != null && m_Grid[x,y].parent != shape.transform);
+    
     void DrawEmptyCells()
     {
         for (int x = 0; x < Width - Header; x++)
