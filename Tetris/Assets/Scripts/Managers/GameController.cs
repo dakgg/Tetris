@@ -35,26 +35,26 @@ public class GameController : MonoBehaviour
     }
 
     void PlayerInput()
-    {
-        if (Input.GetButton("MoveRight") && Time.time > m_TimeToNextKey || Input.GetButtonDown("MoveRight"))
+    {   
+        if (Input.GetKey(KeyCode.RightArrow) && Time.time > m_TimeToNextKey || Input.GetKeyDown(KeyCode.RightArrow))
         {
             m_TimeToNextKey = Time.time + m_KeyRepeatRate;
             m_ActivieShape.MoveRight();
             if (!GameBoard.IsValidPosition(m_ActivieShape)) m_ActivieShape.MoveLeft();
         }
-        else if (Input.GetButton("MoveLeft") && Time.time > m_TimeToNextKey || Input.GetButtonDown("MoveLeft"))
+        else if (Input.GetKey(KeyCode.LeftArrow) && Time.time > m_TimeToNextKey || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             m_TimeToNextKey = Time.time + m_KeyRepeatRate;
             m_ActivieShape.MoveLeft();
             if (!GameBoard.IsValidPosition(m_ActivieShape)) m_ActivieShape.MoveRight();
         }
-        else if (Input.GetButtonDown("Rotate") && Time.time > m_TimeToNextKey)
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && Time.time > m_TimeToNextKey)
         {
             m_TimeToNextKey = Time.time + m_KeyRepeatRate;
             m_ActivieShape.RotateRight();
             if (!GameBoard.IsValidPosition(m_ActivieShape)) m_ActivieShape.RotateLeft();
         }
-        else if (Input.GetButton("MoveDown") && Time.time > m_TimeToNextKey || Time.time > m_TimeToDrop)
+        else if (Input.GetKey(KeyCode.DownArrow) && Time.time > m_TimeToNextKey || Time.time > m_TimeToDrop)
         {
             m_TimeToDrop = Time.time + m_DropInterval;
             m_TimeToNextKey = Time.time + m_KeyRepeatRate;
